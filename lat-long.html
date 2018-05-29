@@ -1,0 +1,37 @@
+<h1>This is your wellcome screen !!</h1>
+<div>
+<div class="example-container">
+<input #fromadd placeholder="Enter your current location"
+(blur)="getlatlng(fromadd.value, 'frm')" autofocus>
+<input matInput #toadd placeholder="Enter your drop location" 
+(blur)="getlatlng(toadd.value, 'to')">
+</div>
+</div>
+
+<div>
+<br>
+<div *ngIf="_lat1" style="float: left;" >
+[ From location: {{fromaddress}}
+let: {{_lat1}},
+lng: {{_lon1}} ]
+</div>
+<div *ngIf="_lat2">
+[ To location: {{toaddress}}
+let: {{_lat2}},
+lng: {{_lon2}} ]
+</div> <br>
+<button class="mbutton" *ngIf="_lat1 && _lat2"
+(click)="_getDistanceFromLatLonInKm()"
+ mat-raised-button color="primary">GetDistance</button>
+
+{{byroaddistance}} , {{byroadtime}} , {{withoutroaddistance}}
+<div *ngIf="_lat1 && _lat2">
+<agm-map [latitude]="_lat1" [longitude]="_lon1"[scrollwheel]="true" [zoom]="4">
+<agm-marker [latitude]="_lat1" [longitude]="_lon1"[label]="fromaddress">
+</agm-marker>
+<agm-marker [latitude]="_lat2" [longitude]="_lon2"[label]="toaddress">
+</agm-marker>
+</agm-map>
+</div>
+<br>
+</div>
